@@ -1,8 +1,13 @@
+# :rage:「啊钓钓钓!」Ava模拟器 
+
+加入了人物向晚大魔王。主要功能由原作者开发。
+
 <a href="https://lab.magiconch.com/sakana/?v=takina" target="_blank">
   <img src="html/takina.png" height="160px">
 </a><a href="https://lab.magiconch.com/sakana/?v=chisato" target="_blank">
   <img src="html/chisato.png" height="160px">
 </a>
+<img src="html/avaBowl.png" height="160px">
 
 # 🐟「Sakana!」石蒜模拟器
 
