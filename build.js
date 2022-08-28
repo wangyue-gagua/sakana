@@ -48,9 +48,12 @@ const fileNames = [
   // 'sakana.css',
   'takina.png',
   'chisato.png',
+  'ava.png',
   'blue00f4.png',
+  'avaBirthday.png',
   'sakana.m4a',
   'chinanago.m4a',
+  'ava.m4a',
 ];
 const Types = {
   png: 'image/png',

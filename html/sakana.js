@@ -4,6 +4,8 @@
  * Author: itorr <https://github.com/itorr>
  * Repository: https://github.com/itorr/sakana
  */
+
+const characterList = ['ava', 'chisato', 'takina'];
 const Sakana = (_=>{
     /* css */
     
@@ -23,6 +25,7 @@ const Sakana = (_=>{
 
     const chisatoConsoleStyle = 'color:#FED;background-color:#C34;padding:2px 4px;';
     const takinaConsoleStyle = 'color:#CCC;background-color:#235;padding:2px 4px;';
+    const avaConsoleStyle = 'color:#FFF;background-color:#9AC8E2;padding:2px 4px;';
 
     // 角色们属性
     const Characters = {
@@ -39,6 +42,13 @@ const Sakana = (_=>{
             t: 0, // 垂直速度
             w: 0, // 横向速度
             d: 0.988 // 衰减
+        },
+        ava: {
+            r: 0, // 角度
+            y: 10, // 高度
+            t: 0, // 垂直速度
+            w: 0, // 横向速度
+            d: 0.98 // 衰减
         }
     };
 
@@ -46,6 +56,7 @@ const Sakana = (_=>{
     const Voices = {
         chisato: new Audio('chinanago.m4a'),
         takina: new Audio('sakana.m4a'),
+        ava: new Audio('ava.m4a'),
 
         isMute: true
     };
@@ -89,7 +100,7 @@ const Sakana = (_=>{
 
         let {
             el, // 启动元素
-            character = 'takina', // 角色
+            character = 'ava', // 角色
             inertia, // 惯性
             originRotate = 0, // 水平度数
             r, // 初始角度
@@ -141,7 +152,7 @@ const Sakana = (_=>{
             let { r,y,t,w,d } = v;
             const x = r * 1;
             const _y = y;// - Math.abs(x);
-            characterEl.style.transform = `rotate(${r}deg) translateX(${x}px) translateY(${y}px)`;
+            characterEl.style.transform = `rotate(${r}deg) translateX(${x}px) translateY(${y}px) scale(${1 + Math.abs(r) * 0.01})`;
         
             ctx.clearRect(0,0,width,height);
             ctx.save();
@@ -387,11 +398,8 @@ const Sakana = (_=>{
         };
 
         const switchCharacter = v=>{
-            if(character === 'chisato'){
-                character = 'takina';
-            }else{
-                character = 'chisato';
-            }
+            let currentCharacterIndex = characterList.indexOf(character);
+            character = characterList[(currentCharacterIndex + 1) % characterList.length];
 
             setCharacter(character);
 
@@ -419,7 +427,7 @@ const Sakana = (_=>{
                     log('%cchin~a~na~go~',chisatoConsoleStyle);
                     Voices.chisato.play();
                 };
-            } else {
+            } else if (character === 'takina') {
                 if (
                     // 'nice sakana~' 经验值
                     v.r >= Characters.takina.r
@@ -428,7 +436,10 @@ const Sakana = (_=>{
                     log('%csakana~',takinaConsoleStyle);
                     Voices.takina.play();
                 };
-            };
+            } else {
+                log('%c啊钓钓钓',avaConsoleStyle);
+                    Voices.ava.play();
+            }
         };
 
         setCharacter(character);
